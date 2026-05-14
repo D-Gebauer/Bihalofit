@@ -4,7 +4,7 @@ A Python package implementing **BiHalofit** — the fitting formula of the
 non-linear matter bispectrum from Takahashi et al. 2019
 ([arXiv:1911.07886](https://arxiv.org/abs/1911.07886)).
 
-This is a port of the C++ implementation that lives in `../bihalofit_cpp/`,
+This is a port of the C++ implementation from github.com/anikhalder/bihalofit_cpp,
 with the numerically intensive routines (`sigma(r)`, the RK4 growth-factor
 integrator, `r_sigma` bisection, the bispectrum kernel) compiled to native
 code via [Numba](https://numba.pydata.org/). Vectorized calls are parallelized
