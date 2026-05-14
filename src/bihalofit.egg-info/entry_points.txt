@@ -1,0 +1,2 @@
+[console_scripts]
+bihalofit = bihalofit.cli:main
