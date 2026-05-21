@@ -8,7 +8,7 @@ cached on disk via ``cache=True`` so subsequent process starts are fast.
 from __future__ import annotations
 
 import numpy as np
-from numba import njit, prange
+from numba import njit
 
 EPS = 1.0e-4  # fractional accuracy of BS computation (matches C++)
 
@@ -399,13 +399,13 @@ def baryon_ratio(k1, k2, k3, z):
 # Vectorized helpers (one redshift, many triangles)
 # ---------------------------------------------------------------------------
 
-@njit(cache=True, parallel=True)
+@njit(cache=True)
 def bispec_array(k1_arr, k2_arr, k3_arr, z, D1, r_sigma, n_eff,
                  sigma8, om, ow, w, h, omc, omb, ns, norm,
                  k_data, pk_data, use_data):
     n = k1_arr.shape[0]
     out = np.empty(n, dtype=np.float64)
-    for i in prange(n):
+    for i in range(n):
         out[i] = bispec_precomp(k1_arr[i], k2_arr[i], k3_arr[i], z,
                                 D1, r_sigma, n_eff,
                                 sigma8, om, ow, w, h, omc, omb, ns, norm,
@@ -413,33 +413,33 @@ def bispec_array(k1_arr, k2_arr, k3_arr, z, D1, r_sigma, n_eff,
     return out
 
 
-@njit(cache=True, parallel=True)
+@njit(cache=True)
 def bispec_tree_array(k1_arr, k2_arr, k3_arr, D1,
                       h, om, omc, omb, ns, norm,
                       k_data, pk_data, use_data):
     n = k1_arr.shape[0]
     out = np.empty(n, dtype=np.float64)
-    for i in prange(n):
+    for i in range(n):
         out[i] = bispec_tree_precomp(k1_arr[i], k2_arr[i], k3_arr[i], D1,
                                      h, om, omc, omb, ns, norm,
                                      k_data, pk_data, use_data)
     return out
 
 
-@njit(cache=True, parallel=True)
+@njit(cache=True)
 def baryon_ratio_array(k1_arr, k2_arr, k3_arr, z):
     n = k1_arr.shape[0]
     out = np.empty(n, dtype=np.float64)
-    for i in prange(n):
+    for i in range(n):
         out[i] = baryon_ratio(k1_arr[i], k2_arr[i], k3_arr[i], z)
     return out
 
 
-@njit(cache=True, parallel=True)
+@njit(cache=True)
 def linear_pk_array(k_arr, h, om, omc, omb, ns, norm, k_data, pk_data, use_data):
     n = k_arr.shape[0]
     out = np.empty(n, dtype=np.float64)
-    for i in prange(n):
+    for i in range(n):
         out[i] = linear_pk(k_arr[i], h, om, omc, omb, ns, norm,
                            k_data, pk_data, use_data)
     return out

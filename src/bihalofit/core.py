@@ -6,8 +6,8 @@ hand it a tabulated linear P(k), then call :meth:`bispec`, :meth:`bispec_tree`,
 :meth:`baryon_ratio`, :meth:`D1`, :meth:`r_sigma`, or :meth:`linear_pk`.
 
 All bispectrum methods accept either scalar floats or NumPy arrays for
-``k1, k2, k3``. Array inputs are broadcast together and computed in parallel
-through Numba-compiled kernels. Expensive per-redshift quantities (the linear
+``k1, k2, k3``. Array inputs are broadcast together and computed through
+Numba-compiled kernels (single-threaded). Expensive per-redshift quantities (the linear
 growth factor ``D1(z)`` and the non-linear scale ``r_sigma(z)``) are cached
 keyed by ``z`` so they are computed once per redshift across an entire batch.
 """
