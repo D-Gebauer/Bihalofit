@@ -1,5 +1,0 @@
-numpy>=1.22
-numba>=0.57
-
-[test]
-pytest>=7
